@@ -326,7 +326,7 @@ class Config(pyofig.ConfigDict):
                             domain=int,
                             default=100)
 
-    def timed_mipgap(self):
+    def timed_mipgap_args(self):
         self.add_to_config('timed_mipgap',
                            description="use a time-dependent target mip gap",
                            domain=bool,

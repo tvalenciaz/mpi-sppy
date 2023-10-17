@@ -280,7 +280,7 @@ def add_timed_mipgap(cylinder_dict, cfg):
     if _hasit(cfg,'timed_mipgap'):
         from mpisppy.extensions.timed_mipgap import TimedMIPGapCB
         cylinder_dict = extension_adder(cylinder_dict, TimedMIPGapCB)
-        cylinder_dict['opt_kwargs']['options']['timed_mipgap']= {'timecurve':cnfg.timed_mipgap_options}
+        cylinder_dict['opt_kwargs']['options']['timed_mipgap']= {'timecurve':cfg.timed_mipgap_options}
 
     return cylinder_dict        
 
