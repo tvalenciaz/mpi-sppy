@@ -16,6 +16,10 @@ class LagrangianOuterBound(mpisppy.cylinders.spoke.OuterBoundWSpoke):
         self.opt.subproblem_creation(verbose)
         self.opt._create_solvers()
 
+        # In case it has extensions (e.g. callbacks)
+        if (self.opt.extensions is not None):
+            self.opt.extobject.pre_iter0()
+
     def lagrangian(self):
         verbose = self.opt.options['verbose']
         # This is sort of a hack, but might help folks:
