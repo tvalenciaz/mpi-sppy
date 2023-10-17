@@ -773,9 +773,6 @@ class PHBase(mpisppy.spopt.SPOpt):
                 stochastic program with the nonanticipativity constraints
                 removed.
         """
-        if (self.extensions is not None):
-            self.extobject.pre_iter0()
-
         verbose = self.options["verbose"]
         dprogress = self.options["display_progress"]
         dtiming = self.options["display_timing"]
@@ -793,6 +790,14 @@ class PHBase(mpisppy.spopt.SPOpt):
         global_toc("Creating solvers")
         self._create_solvers()
 
+        # TVZ: I moved this from very top of the Iter0 function because timed_mipgap extension
+        # requires `pre_iter0` function to be called *after* solvers have been created
+        # I'm not aware of this causing conflicts to other extensions, but if this change
+        # is not desired, an additional extension function `pre_first_solve` or similar
+        # could be created instead.
+        if (self.extensions is not None):
+            self.extobject.pre_iter0()
+        
         teeme = ("tee-rank0-solves" in self.options
                  and self.options['tee-rank0-solves']
                  and self.cylinder_rank == 0
