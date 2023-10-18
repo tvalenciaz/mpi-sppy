@@ -220,13 +220,11 @@ class Config(pyofig.ConfigDict):
                               domain=bool,
                               default=False)
 
-
         self.add_to_config("linearize_proximal_terms",
                               description="For PH, linearize the proximal terms for "
                               "all nonanticipative variables",
                               domain=bool,
                               default=False)
-
 
         self.add_to_config("proximal_linearization_tolerance",
                             description="For PH, when linearizing proximal terms, "
@@ -234,6 +232,12 @@ class Config(pyofig.ConfigDict):
                             "is looser than this value (default 1e-1)",
                             domain=float,
                             default=1.e-1)
+
+        self.add_to_config('warm_start_prox_approx',
+                           description="Manually warm-start solution from previous iteration "
+                                       "after adding proximal linearization cut.",
+                           domain=bool,
+                           default=False)
 
     def make_parser(self, progname=None, num_scens_reqd=False):
         raise RuntimeError("make_parser is no longer used. See comments at top of config.py")
